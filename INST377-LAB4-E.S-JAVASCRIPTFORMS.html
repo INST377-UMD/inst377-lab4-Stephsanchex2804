@@ -1,0 +1,159 @@
+<html>
+
+<head>
+    <title>INST377- Lab 4-Form Validation</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: cyan;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .section-row {
+            display: flex;
+            justify-content: space-around;
+            margin: 10px auto;
+            width: 90%;
+        }
+
+        /* Section Styling */
+        .section {
+            border: 2px solid black;
+            padding: 20px;
+            width: 45%;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(122, 65, 65, 0.1);
+        }
+
+        h1 {
+            color: burlywood;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: teal;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: blue;
+        }
+
+        input {
+            padding: 5px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="pageTitle">INST377 - Form Validation Project</h1>
+
+    <!-- First Row: Alert Me & Change Color -->
+    <div class="section-row">
+        <!-- Alert Me Section -->
+        <div class="section">
+            <form name="contactForm" onsubmit="return formValidation()" action="https://www.google.com">
+                <label for="firstName">Name:</label>
+                <input type="text" placeholder="Emma" id="firstName" required>
+                <br>
+                <input type="submit" value="Alert Me">
+            </form>
+        </div>
+
+        <!-- Change Color Section -->
+        <div class="section">
+            <button onclick="changeColor()">Change Color</button>
+            <script type="text/javascript">
+                function changeColor() {
+                    console.log('Attempting to change background color of page');
+        
+                    if (document.body.style.backgroundColor == 'cyan') {
+                        document.body.style.backgroundColor = 'blue';
+                    } else {
+                        document.body.style.backgroundColor = 'cyan';
+                    }
+        
+                    console.log('Successfully changed background color');
+                }
+            </script>
+        </div>
+    </div>
+
+    <!-- Second Row: Text Tester & Add Text -->
+    <div class="section-row">
+        <!-- Text Tester Section -->
+        <div class="section">
+            <form>
+                <label for="textInput">Enter Text:</label>
+                <input type="text" id="textInput">
+                <button type="button" onclick="validateText()">Validate Text</button>
+            </form>
+        </div>
+
+        <!-- Add Text Section -->
+        <div class="section">
+            <button onclick="addTextToHeading()">Add Text</button>
+        </div>
+    </div>
+
+    <!-- JavaScript Code -->
+    <script type="text/javascript">
+        // Form Validation for Alert Me Section
+        function formValidation() {
+            const name = document.contactForm.firstName.value.trim();
+            const validationRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+            if (name === "") {
+                document.body.style.backgroundColor = 'orange';
+                alert('Enter a valid first name!');
+                return false;
+            }
+
+            if (validationRegex.test(name)) {
+                document.body.style.backgroundColor = 'red';
+                alert('Special characters are not allowed!');
+                return false;
+            }
+
+            alert(`Hi ${name}!`);
+            return true;
+        }
+
+    
+
+        // Text Tester Section
+        function validateText() {
+            const text = document.getElementById('textInput').value;
+            const specialCharRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+            if (specialCharRegex.test(text)) {
+                alert('How about ....Nah!');
+            } else {
+                alert('Text is valid!');
+            }
+        textInput.value = ''
+        
+ }
+         
+    
+
+        // Add Text Section
+        function addTextToHeading() {
+            const heading = document.getElementById('pageTitle');
+            if (!heading.innerText.includes(" - Add Text")) {
+                heading.innerText += " - Add Text";
+            }
+        }
+    </script>
+</body>
+
+</html>
